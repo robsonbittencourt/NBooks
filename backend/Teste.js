@@ -6,9 +6,8 @@ console.log("funcionou");
 app.get("/books/:bookName?",function(req, res, next){
 	var bn = req.params.bookName;
 	
-	console.log(bn);
 	
-	res.send("hãhãhãhã");
+	res.send("Livro solicitado " + req.params.bookName);
 });
 
 app.listen(3000);
