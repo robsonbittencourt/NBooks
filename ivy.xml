@@ -10,5 +10,7 @@
 	
 	<dependencies>
         <dependency org="br.com.caelum" name="vraptor" rev="3.5.1"/>
+        <dependency org="junit" name="junit" rev="4.11"/>
+        <dependency org="org.mockito" name="mockito-all" rev="1.9.5"/>
     </dependencies>
 </ivy-module>

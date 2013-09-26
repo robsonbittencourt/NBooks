@@ -1,7 +1,7 @@
 package model;
 
 
-public class Livro {
+public class Livro extends AbstractModel{
 	private Long id;
 	private Long isbn;	
 	private Long editora;
