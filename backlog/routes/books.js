@@ -50,7 +50,7 @@ var populateDB = function() {
     var drinks = [ 
     { 
         "isbn" : "555555555",
-        "editora" : "Teste"
+        "editora" : "Teste",
         "estado" : "RS",
         "nome" : "Harry Potter - Prisioneiro de Azkabam",
         "autor" : {
@@ -60,13 +60,13 @@ var populateDB = function() {
         "numeropaginas" : "350",
         "resumo" : "Lorem ipsum, Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum!",
         "notasconteudo" : "Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,",
-        "palavraschave" : ["Ficção", "Fantasia", "Adolescente" , Jovem Adulto""]
+        "palavraschave" : ["Ficção", "Fantasia", "Adolescente" , "Jovem Adulto"],
         "quantidade" : "11",
         "ano" : "2002"
     },
     { 
         "isbn" : "555555555",
-        "editora" : "Teste"
+        "editora" : "Teste",
         "estado" : "RS",
         "nome" : "Harry Potter - Prisioneiro de Azkabam",
         "autor" : {
@@ -76,13 +76,13 @@ var populateDB = function() {
         "numeropaginas" : "350",
         "resumo" : "Lorem ipsum, Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum!",
         "notasconteudo" : "Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,",
-        "palavraschave" : ["Ficção", "Fantasia", "Adolescente" , Jovem Adulto""]
+        "palavraschave" : ["Ficção", "Fantasia", "Adolescente" , "Jovem Adulto"],
         "quantidade" : "11",
         "ano" : "2002"
     },
     { 
         "isbn" : "555555555",
-        "editora" : "Teste"
+        "editora" : "Teste",
         "estado" : "RS",
         "nome" : "Harry Potter - Prisioneiro de Azkabam",
         "autor" : {
@@ -92,7 +92,7 @@ var populateDB = function() {
         "numeropaginas" : "350",
         "resumo" : "Lorem ipsum, Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum!",
         "notasconteudo" : "Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,",
-        "palavraschave" : ["Ficção", "Fantasia", "Adolescente" , Jovem Adulto""]
+        "palavraschave" : ["Ficção", "Fantasia", "Adolescente" , "Jovem Adulto"],
         "quantidade" : "11",
         "ano" : "2002"
     }
