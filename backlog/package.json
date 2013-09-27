@@ -1,6 +1,6 @@
 {
-    "name": "bebendo-social-api",
-    "description": "BebendoSocial API",
+    "name": "NBooks-api",
+    "description": "NBooks API",
     "version": "0.0.1",
     "private": true,
     "dependencies": {

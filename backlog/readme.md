@@ -1,10 +1,11 @@
-## Node.js-Based RESTFul services for Employee Directory Sample App ##
+## Node.js-Based RESTFul services for Books Directory Sample App ##
 
 Built with the Node.js and the [Express framework](http://expressjs.com/).
 
-The client application is available in [this repository](https://github.com/ccoenraets/directory-backbone-bootstrap)
+The client application is available in [this repository]
 
-Refer to [this blog post](http://coenraets.org/blog/2013/04/sample-application-with-backbone-js-and-twitter-bootstrap-updated-and-improved/) for more information about the application.
+Download MongoDb at http://www.mongodb.org/downloads
+
 
 ## Setting Up ##
 
@@ -12,8 +13,6 @@ npm install
 
 node server.js
 
+Unzip mongodb, create the folder structure "data\db".
 
-
-A PHP / MySQL version of these RESTful services is available in [this repository](https://github.com/ccoenraets/directory-rest-php)
-
-
+run at console "{the path for your mongodb}\mongod.exe --dbpath {the path for your mongodb}\data\db"
