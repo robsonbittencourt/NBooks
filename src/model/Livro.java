@@ -4,7 +4,7 @@ package model;
 public class Livro extends AbstractModel{
 	private Long id;
 	private Long isbn;	
-	private Long editora;
+	private String editora;
 	private String estado;
 	private String titulo;
 	private Autor autor; 
@@ -31,11 +31,11 @@ public class Livro extends AbstractModel{
 		this.isbn = isbn;
 	}
 	
-	public Long getEditora() {
+	public String getEditora() {
 		return editora;
 	}
 	
-	public void setEditora(Long editora) {
+	public void setEditora(String editora) {
 		this.editora = editora;
 	}
 	

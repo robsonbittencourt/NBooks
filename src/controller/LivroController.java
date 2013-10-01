@@ -21,7 +21,6 @@ public class LivroController {
 	@Get("/livro/add")
 	public void add() {
 		Livro livro = new Livro();
-		livro.setTitulo("Harry Potter");
 		result.forwardTo(this).form(livro);
 	}
 	
