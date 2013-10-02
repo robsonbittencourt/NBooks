@@ -1,0 +1,37 @@
+Livros: 
+{
+	"_id" : "",
+	"isbn" : "",	
+	"editora" : "",
+	"estado" : "",
+	"nome" : "",
+	"autor" :  {
+		"id" : "", 
+		"nome" : ""
+	},
+	"numeroPaginas" : "",
+	"ano" : "",
+	"resumo" : "",
+	"notasConteudo" : "",
+	"palavrasChave" : "",
+	"quantidade" : ""
+}
+
+Usuarios:
+{
+	"_id" : "",
+	"nome" : "",
+	"email" : "",
+	"senha" : "",
+	"cadastrado" : "true/false",
+	"tipo"  : "cliente/admin"
+}
+
+Emprestimos:
+{
+	"_id" : "",
+	"usuario" = "",
+	"livro" = "",
+	"dataEmprestimo" = "",
+	"dataDevolucao" = ""
+}
