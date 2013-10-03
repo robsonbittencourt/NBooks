@@ -85,7 +85,7 @@ module.exports = function (app, config, auth, mailHelper) {
    * @param response contains a populated User object
    * @param next method
    */
-   function getUser(req, res, next) {
+   function buscarLivro(req, res, next) {
       if (req.session && req.session.user) {
         id = req.session.user;
          User.findById(id, function (err, user) {
@@ -309,73 +309,13 @@ module.exports = function (app, config, auth, mailHelper) {
         });
       }
    }
+     
+   app.get('/api/livros', buscarLivros;
+   app.get('/api/livros/:id', buscarLivroPorId);
+   app.post('/api/livros', criarLivro);
+   app.put('/api/livros/:id', atualizarLivro);
+   app.del('/api/livros/:id', apagarLivro);
 
-
-   // Set up routes
-
-   // I looked at versioning via header. Lots of arguments pro/con regarding different types of versioning
-   // I like the embedded version (self documenting) so stuck with that instead
-   // apt.get({path: 'api/user:id', version: '1.0.0'}, getUser_V1);
-   // apt.get({path: 'api/user:id', version: '2.0.0'}, getUser_V2);
-
-
-   /**
-   * Search for users
-   *
-   * @param path
-   * @param promised callback check authorization
-   * @param promised 2nd callback searches for users
-   */
-   app.get('/api/v1/userlist', auth.requiresLogin, searchUsers);
-
-   // TODO Need to figure out the explicit REST URI
-   // confused, specified gets by id or username, seemed to be working
-   // then started getting 405 GET not allowed ??
-   //       app.get('/api/v1/user/:id', getUserById);
-   //       app.get('/api/v1/user/:username', getUserByUsername);
-   // so went back to a generic path
-   /**
-   * Search for users
-   *
-   * @param path
-   * @param promised callback check authorization
-   * @param promised 2nd callback gets user
-   */
-   // This one is takes no args/params and is for the client to retrieve the authenticated user's information
-   app.get('/api/v1/user', auth.requiresLogin, getUser);
-
-   // get the user by id or username, only admin can do this
-   app.get('/api/v1/user/:search', auth.adminAccess, getUserByIdOrUsername);
-
-
-   /**
-   * Update user information
-   *
-   * @param path
-   * @param promised callback check authorization
-   * @param promised 2nd callback searches for users
-   */
-   app.put('/api/v1/user', auth.requiresLogin, putUser);
-
-   /**
-   * Administrator updating user information
-   *
-   * @param path
-   * @param promised callback check authorization
-   * @param promised 2nd callback searches for users
-   */
-   app.put('/api/v1/admin/user', auth.adminAccess, putUserByAdmin);
-
-   // Delete
-   // 405 ? app.del('/api/v1/user/:id', deleteUser);
-   /**
-   * delete a user
-   *
-   * @param path
-   * @param promised callback check Administrator auth
-   * @param promised 2nd callback deletes
-   */
-   app.del('/api/v1/user', auth.adminAccess, deleteUser);
 }
 
 

@@ -6,17 +6,10 @@ var env = process.env.NODE_ENV || 'development',
 var restify = require("restify"), 
 	mongoose = require('mongoose'), 
 	fs = require('fs');
-	//preflightEnabler = require('se7ensky-restify-preflight');
-
+	
 // Paths
 var models_path = config.root + '/models';
 var config_path = config.root + '/config';
-
-
-var database = require('database')(config);
-
-// Bootstrap auth middleware
-//var auth = require(config_path + '/middlewares/authorization.js');
 
 // Configure the server
 var app = restify.createServer({
@@ -24,5 +17,12 @@ var app = restify.createServer({
   version: config.version
 });
 
+var database = require('database')(config);
+
+require(config_path + '/routes')(app, config);
+
+//preflightEnabler = require('se7ensky-restify-preflight');
+// Bootstrap auth middleware
+//var auth = require(config_path + '/middlewares/authorization.js');
 // allows authenticated cross domain requests
-preflightEnabler(app);
+//preflightEnabler(app);

@@ -6,7 +6,7 @@ var restify = require('restify');
 
 var mail = {};
 
-module.exports = function (app, config, auth, mailHelper) {
+module.exports = function (app, config) {
    mail = mailHelper;
 
   /**
