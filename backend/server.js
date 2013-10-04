@@ -1,22 +1,36 @@
-var express = require('express'),
-    books = require('./routes/books');
- 
-var app = express();
+// Load configurations
+var env = process.env.NODE_ENV || 'development', 
+	config = require('./config/config')[env];
 
-app.use(express.bodyParser());
+// Modules
+var restify = require("restify"), 
+	mongoose = require('mongoose'), 
+	fs = require('fs');
+	
+// Paths
+var models_path = config.root + '/models';
+var config_path = config.root + '/config';
 
-// default route
-app.get('/', function(req, res){
-	//res.redirect('/users/');
+// Configure the server
+var app = restify.createServer({
+  name: config.app.name,
+  version: config.version
 });
 
-// books
-app.get('/books', books.findAll);
-//app.post('/books/', books.create);
-app.get('/books/:id', books.findById);
-//app.put('/books/:id', books.update);
-//app.delete('/books/:id', books.delete);
+app.use(restify.bodyParser({ mapParams: false }));
+
+app.listen(config.port, function() {
+  console.log('%s listening at %s', app.name, app.url);
+});
+
+var database = require('./database')(config);
+
+require('./routes/routes')(app, config);
 
 
-app.listen(3000);
-console.log('Listening on port 3000...');
+
+//preflightEnabler = require('se7ensky-restify-preflight');
+// Bootstrap auth middleware
+//var auth = require(config_path + '/middlewares/authorization.js');
+// allows authenticated cross domain requests
+//preflightEnabler(app);
