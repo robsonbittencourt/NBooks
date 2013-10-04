@@ -7,7 +7,18 @@ var mongoose = require('mongoose'),
 module.exports = function (app, config) {
 
     function buscarLivros(req, res, next) {
-        // buscar livros
+        Livros.find({}, function(err, livros){
+            if (err) 
+            {
+                var errObj = err;
+                if (err.err) 
+                    errObj = err.err;
+                return next(new restify.InternalError(errObj));
+            }                
+
+            res.send(livros);
+            return next();  
+        });
     }
 
     function buscarLivro(req, res, next) {
@@ -15,12 +26,11 @@ module.exports = function (app, config) {
             return next(new restify.MissingParameterError('Id do livro é obrigatório.'));
 
         Livros.findById(req.params.id, function (err, livro) {
-            if (err) {
+            if (err) 
                 res.send(new restify.MissingParameterError('Livro não encontrado.'));
 
-                res.send(livro);
-                return next();
-            }
+            res.send(livro);
+            return next();            
         });
     }
 
@@ -29,7 +39,8 @@ module.exports = function (app, config) {
         livro.save(function (err) {
             if (err) {
                 var errObj = err;
-                if (err.err) errObj = err.err;
+                if (err.err) 
+                    errObj = err.err;
                 return next(new restify.InternalError(errObj));
             }
 
