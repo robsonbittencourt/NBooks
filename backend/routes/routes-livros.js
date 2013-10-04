@@ -4,11 +4,11 @@ var mongoose = require('mongoose'),
     restify = require('restify');
 
 
-module.exports = function (app, config) {
-
+module.exports = function (app, config) {    
     function buscarLivros(req, res, next) {
         Livros.find({}, function(err, livros){
             if (err) 
+<<<<<<< HEAD
             {
                 var errObj = err;
                 if (err.err) 
@@ -18,6 +18,12 @@ module.exports = function (app, config) {
 
             res.send(livros);
             return next();  
+=======
+                res.send(new restify.MissingParameterError('Livros não encontrados.'));
+
+            res.send(livros);
+            return next();
+>>>>>>> 3bc0b3fc31a39fbac52c07017add9110b8ad9dc9
         });
     }
 
@@ -30,11 +36,17 @@ module.exports = function (app, config) {
                 res.send(new restify.MissingParameterError('Livro não encontrado.'));
 
             res.send(livro);
+<<<<<<< HEAD
             return next();            
+=======
+            return next();
+            
+>>>>>>> 3bc0b3fc31a39fbac52c07017add9110b8ad9dc9
         });
     }
 
     function criarLivro(req, res, next) {
+        console.log(req.body);
         var livro = new Livro(req.params.livro);
         livro.save(function (err) {
             if (err) {
