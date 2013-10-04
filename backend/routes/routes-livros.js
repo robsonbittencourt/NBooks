@@ -33,9 +33,23 @@ module.exports = function (app, config) {
         });
     }
 
-    function criarLivro(req, res, next) {
-        console.log(req.body);
-        var livro = new Livro(req.params.livro);
+    function criarLivro(req, res, next) {        
+         console.log(req.body.nome);         
+        var livro = new Livros(req.body);
+
+        // livro.nome = req.body.nome;
+        // livro.isbn= req.body.isbn;
+        // livro.editora= req.body.editora;
+        // livro.estado= req.body.estado;
+        // livro.autor = req.body.autor;
+        // livro.numeroPaginas= req.body.numeroPaginas;
+        // livro.ano= req.body.ano;
+        // livro.quantidade= req.body.quantidade;
+        // livro.resumo= req.body.resumo;
+        // livro.notasConteudo= req.body.notasConteudo;
+
+        console.log("Livro -:>" + livro);
+
         livro.save(function (err) {
             if (err) {
                 var errObj = err;
