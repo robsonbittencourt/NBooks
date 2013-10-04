@@ -4,10 +4,15 @@ var mongoose = require('mongoose'),
     restify = require('restify');
 
 
-module.exports = function (app, config) {
-
+module.exports = function (app, config) {    
     function buscarLivros(req, res, next) {
-        // buscar livros
+        Livros.find({}, function(err, livros){
+            if (err) 
+                res.send(new restify.MissingParameterError('Livros não encontrados.'));
+
+            res.send(livros);
+            return next();
+        });
     }
 
     function buscarLivro(req, res, next) {
@@ -15,16 +20,17 @@ module.exports = function (app, config) {
             return next(new restify.MissingParameterError('Id do livro é obrigatório.'));
 
         Livros.findById(req.params.id, function (err, livro) {
-            if (err) {
+            if (err) 
                 res.send(new restify.MissingParameterError('Livro não encontrado.'));
 
-                res.send(livro);
-                return next();
-            }
+            res.send(livro);
+            return next();
+            
         });
     }
 
     function criarLivro(req, res, next) {
+        console.log(req.body);
         var livro = new Livro(req.params.livro);
         livro.save(function (err) {
             if (err) {

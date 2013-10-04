@@ -13,13 +13,21 @@ var config_path = config.root + '/config';
 
 // Configure the server
 var app = restify.createServer({
-  name: config.app.name
+  name: config.app.name,
   version: config.version
 });
 
-var database = require('database')(config);
+app.use(restify.bodyParser({ mapParams: false }));
 
-require(config_path + '/routes')(app, config);
+app.listen(config.port, function() {
+  console.log('%s listening at %s', app.name, app.url);
+});
+
+var database = require('./database')(config);
+
+require('./routes/routes')(app, config);
+
+
 
 //preflightEnabler = require('se7ensky-restify-preflight');
 // Bootstrap auth middleware
