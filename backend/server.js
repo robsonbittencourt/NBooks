@@ -17,7 +17,10 @@ var app = restify.createServer({
   version: config.version
 });
 
-app.use(restify.bodyParser({ mapParams: false }));
+//{ mapParams: false }
+app.use(restify.bodyParser());
+app.use(restify.acceptParser(app.acceptable));
+app.use(restify.queryParser());
 
 app.listen(config.port, function() {
   console.log('%s listening at %s', app.name, app.url);
