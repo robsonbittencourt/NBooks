@@ -9,7 +9,7 @@ module.exports = function (app, config) {
       res.send({'message':'Success'});
    });
       
-   require(routes_path + '/routes-livros.js')(app, config);
+   require(routes_path + '/books.js')(app, config);
    //require(config_path + '/users.js')(app, config, auth, smtpTransport);   
    //require(config_path + '/.js')(app, config, auth);
 }
