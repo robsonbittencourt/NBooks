@@ -1,0 +1,3 @@
+cd YOUR_PATH_FOR_MONGODB\BIN
+mongo localhost:27017/YOUR_DATABASE_NAME
+pause

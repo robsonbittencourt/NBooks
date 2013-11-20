@@ -1,105 +1,113 @@
-var MongoClient = require('mongodb').MongoClient,
-    Server = require('mongodb').Server,
-    Bson = require('mongodb').BSONPure,
-    db;
+var mongoose = require('mongoose'),
+    Book = mongoose.model('Books'),
+    ObjectId = mongoose.Types.ObjectId,
+    restify = require('restify');
 
-var mongoClient = new MongoClient(new Server('localhost', 27017));
 
-mongoClient.open(function(err, mongoClient) {
-    db = mongoClient.db("nbooks");
-    db.collection('books', {strict:true}, function(err, collection) {
-        if (err) {
-            console.log("The 'books' collection doesn't exist. Creating it with sample data...");
-            populateDB();
-        }
-    });
-});
-
- 
-exports.findById = function(request, response) {
-    var id = Bson.ObjectID.createFromHexString(request.params.id);
-
-    db.collection('books', function(err, collection) {
-        collection.findOne({'_id': id}, function(err, item) {
-            console.log(item);
-            response.jsonp(item);
+module.exports = function (app, config) {    
+    function findAll(req, res, next) {
+        console.log('find');
+        Book.find(function(err, books){            
+            console.log(books);
+            res.send(books);
+            return next();  
         });
-    });
-};
-
-exports.findAll = function(request, response) {
-    var name = request.query["Nome"];    
-
-    db.collection('books', function(err, collection) {
-        if (name) {
-            collection.find({"nome": new RegExp(name, "i")}).toArray(function(err, items) {
-                response.jsonp(items);
-            });
-        } else {
-            collection.find().toArray(function(err, items) {
-                console.log(items);
-                response.jsonp(items);
-            });
-        }
-    });
-};
- 
-
-var populateDB = function() {
-    console.log("Populating drinks database...");
-    var drinks = [ 
-    { 
-        "isbn" : "555555555",
-        "editora" : "Teste",
-        "estado" : "RS",
-        "nome" : "Harry Potter - Prisioneiro de Azkabam",
-        "autor" : {
-            "nome" : "J. K. Rowling",
-            "id" : "135486795464612"
-        },
-        "numeropaginas" : "350",
-        "resumo" : "Lorem ipsum, Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum!",
-        "notasconteudo" : "Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,",
-        "palavraschave" : ["Ficção", "Fantasia", "Adolescente" , "Jovem Adulto"],
-        "quantidade" : "11",
-        "ano" : "2002"
-    },
-    { 
-        "isbn" : "555555555",
-        "editora" : "Teste",
-        "estado" : "RS",
-        "nome" : "Harry Potter - Prisioneiro de Azkabam",
-        "autor" : {
-            "nome" : "J. K. Rowling",
-            "id" : "135486795464612"
-        },
-        "numeropaginas" : "350",
-        "resumo" : "Lorem ipsum, Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum!",
-        "notasconteudo" : "Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,",
-        "palavraschave" : ["Ficção", "Fantasia", "Adolescente" , "Jovem Adulto"],
-        "quantidade" : "11",
-        "ano" : "2002"
-    },
-    { 
-        "isbn" : "555555555",
-        "editora" : "Teste",
-        "estado" : "RS",
-        "nome" : "Harry Potter - Prisioneiro de Azkabam",
-        "autor" : {
-            "nome" : "J. K. Rowling",
-            "id" : "135486795464612"
-        },
-        "numeropaginas" : "350",
-        "resumo" : "Lorem ipsum, Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum!",
-        "notasconteudo" : "Lorem ipsum,Lorem ipsum,Lorem ipsum,Lorem ipsum,",
-        "palavraschave" : ["Ficção", "Fantasia", "Adolescente" , "Jovem Adulto"],
-        "quantidade" : "11",
-        "ano" : "2002"
     }
-];
- 
-    db.collection('books', function(err, collection) {
-        collection.insert(drinks, {safe:true}, function(err, result) {});
-    });
- 
-};
+
+    function findOne(req, res, next) {
+        if (!req.params.id)
+            return next(new restify.MissingParameterError('Id is required.'));
+
+        Books.findById(req.params.id, function (err, book) {
+            if (err) 
+                res.send(new restify.MissingParameterError('Book not found.'));
+
+            res.send(book);
+            return next();            
+        });
+    }
+
+    function create(req, res, next) {                     
+        //var teste = JSON.parse(req.body);
+
+        console.log(req.body);  
+        var book = new Book(
+        {
+            isbn: req.body.isbn, 
+            title: req.body.title,
+            year: req.body.year,
+            publisher: req.body.publisher,
+            state: req.body.state,
+            author: req.body.author,
+            pageNumber: req.body.pageNumber,
+            notes: req.body.notes,
+            quantity: req.body.quantity,
+            resume: req.body.resume
+        });       
+        
+        console.log(book);  
+        book.save();
+
+        res.send(book);
+        return next();
+
+        // console.log("Livro -:>" + book);
+
+        // book.save(function (err) {
+        //     if (err) {
+        //         var errObj = err;
+        //         if (err.err) 
+        //             errObj = err.err;
+        //         return next(new restify.InternalError(errObj));
+        //     }
+
+        //     res.send(book);
+        //     return next();
+        // });
+    }
+
+    function update(req, res, next) {
+        if (!req.params.id)
+            return next(new restify.MissingParameterError('Id is required.'));
+
+        Books.findById(req.params.id, function (err, book) {
+            if (err) {
+                res.send(new restify.MissingParameterError('Book not found.'));
+
+                book = req.params.book;
+                book.save(function (err) {
+                    if (err) {
+                        var errObj = err;
+                        if (err.err) errObj = err.err;
+                        return next(new restify.InternalError(errObj));
+                    }
+
+                    res.send(book);
+                    return next();
+                });
+            }
+        });
+    }
+
+    function deleteOne(req, res, next) {
+        if (!req.params.id)
+            return next(new restify.MissingParameterError('Id is required.'));
+
+        Books.findById(req.params.id).remove(function (err) {
+            if (err) {
+                var errObj = err;
+                if (err.err) errObj = err.err;
+                return next(new restify.InternalError(errObj));
+            }
+
+            res.send({});
+            return next();
+        });
+    }
+
+    app.get('/api/books/', findAll);
+    app.get('/api/books/:id', findOne);
+    app.post('/api/books/', create);
+    app.put('/api/books/:id', update);
+    app.del('/api/books/:id', deleteOne);
+}
