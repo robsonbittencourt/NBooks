@@ -27,7 +27,7 @@ module.exports = function (app, config) {
         if (!req.params.id)
             return next(new restify.MissingParameterError('Id is required.'));
 
-        Books.findById(req.params.id, function (err, book) {
+        Book.findById(req.params.id, function (err, book) {
             if (err) 
                 res.send(new restify.MissingParameterError('Book not found.'));
 
@@ -92,7 +92,7 @@ module.exports = function (app, config) {
         if (!req.params.id)
             return next(new restify.MissingParameterError('Id is required.'));
 
-        Books.findById(req.params.id).remove(function (err) {
+        Book.findByIdAndRemove(req.params.id, function (err) {
             if (err) {
                 var errObj = err;
                 if (err.err) errObj = err.err;
