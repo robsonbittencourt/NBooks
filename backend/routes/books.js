@@ -5,10 +5,19 @@ var mongoose = require('mongoose'),
 
 
 module.exports = function (app, config) {    
-    function findAll(req, res, next) {
-        console.log('find');
-        Book.find(function(err, books){            
-            console.log(books);
+    function findAll(req, res, next) { 
+        var query = {};
+
+        if (req.params.author)
+            query.author = req.params.author;
+        
+        if (req.params.title)
+            query.title = req.params.title;
+        
+        if (req.params.year)
+            query.year = req.params.year;
+        
+        Book.find(query, function(err, books){                        
             res.send(books);
             return next();  
         });
@@ -26,11 +35,8 @@ module.exports = function (app, config) {
             return next();            
         });
     }
-
-    function create(req, res, next) {                     
-        //var teste = JSON.parse(req.body);
-
-        console.log(req.body);  
+    
+    function create(req, res, next) {                             
         var book = new Book(
         {
             isbn: req.body.isbn, 
@@ -44,48 +50,41 @@ module.exports = function (app, config) {
             quantity: req.body.quantity,
             resume: req.body.resume
         });       
-        
-        console.log(book);  
+                
         book.save();
 
         res.send(book);
         return next();
-
-        // console.log("Livro -:>" + book);
-
-        // book.save(function (err) {
-        //     if (err) {
-        //         var errObj = err;
-        //         if (err.err) 
-        //             errObj = err.err;
-        //         return next(new restify.InternalError(errObj));
-        //     }
-
-        //     res.send(book);
-        //     return next();
-        // });
     }
 
     function update(req, res, next) {
         if (!req.params.id)
             return next(new restify.MissingParameterError('Id is required.'));
 
-        Books.findById(req.params.id, function (err, book) {
-            if (err) {
+        Book.findById(req.params.id, function (err, book) {
+            if (err || !book)
                 res.send(new restify.MissingParameterError('Book not found.'));
 
-                book = req.params.book;
-                book.save(function (err) {
-                    if (err) {
-                        var errObj = err;
-                        if (err.err) errObj = err.err;
-                        return next(new restify.InternalError(errObj));
-                    }
+            console.log(book);  
 
-                    res.send(book);
-                    return next();
-                });
-            }
+            book.isbn = req.body.isbn;
+            book.title = req.body.title;
+            book.year = req.body.year;
+            book.publisher = req.body.publisher;
+            book.state = req.body.state;
+            book.author = req.body.author;
+            book.pageNumber = req.body.pageNumber;
+            book.notes = req.body.notes;
+            book.quantity = req.body.quantity;
+            book.resume = req.body.resume;
+            
+            console.log(book);  
+
+            book.save(function (err) { 
+                res.send(book);
+                return next();
+            });
+            
         });
     }
 
@@ -105,7 +104,7 @@ module.exports = function (app, config) {
         });
     }
 
-    app.get('/api/books/', findAll);
+    app.get('/api/books/', findAll);    
     app.get('/api/books/:id', findOne);
     app.post('/api/books/', create);
     app.put('/api/books/:id', update);
