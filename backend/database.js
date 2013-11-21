@@ -8,8 +8,7 @@ module.exports = function(config)
 	var models_path = config.root + '/models';
 
 	// Database
-	var connection = config.db_prefix + '://' + config.host + ':' + config.db_port + '/' + config.db_database;
-	console.log(connection);
+	var connection = config.db_prefix + '://' + config.host + ':' + config.db_port + '/' + config.db_database;	
 	
 	mongoose.connect(connection, {
 		server:{auto_reconnect:true}
@@ -22,7 +21,7 @@ module.exports = function(config)
 	});
 
 	db.once('open', function callback () {
-	  	console.log("Database connection opened.");
+	  	console.log("Database connection opened at " + connection);
 	});
 
 	db.on('error', function (err) {
@@ -38,9 +37,9 @@ module.exports = function(config)
 		mongoose.connect(connection, {server:{auto_reconnect:true}});
 	});
 
-	// Init models
+	// Load models
 	fs.readdirSync(models_path).forEach(function (file) {
-  		console.log("Loading model " + file);
+  		console.log("Loading model: " + file);
 	  	require(models_path + '/' + file);
 	});	
 };

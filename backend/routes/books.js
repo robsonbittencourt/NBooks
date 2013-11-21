@@ -1,8 +1,7 @@
-var mongoose = require('mongoose'),
+var mongoose = require('mongoose'),    
     Book = mongoose.model('Books'),
     ObjectId = mongoose.Types.ObjectId,
     restify = require('restify');
-
 
 module.exports = function (app, config) {    
     function findAll(req, res, next) { 
@@ -65,8 +64,6 @@ module.exports = function (app, config) {
             if (err || !book)
                 res.send(new restify.MissingParameterError('Book not found.'));
 
-            console.log(book);  
-
             book.isbn = req.body.isbn;
             book.title = req.body.title;
             book.year = req.body.year;
@@ -83,8 +80,7 @@ module.exports = function (app, config) {
             book.save(function (err) { 
                 res.send(book);
                 return next();
-            });
-            
+            });            
         });
     }
 

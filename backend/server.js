@@ -17,23 +17,16 @@ var app = restify.createServer({
   version: config.version
 });
 
-//{ mapParams: false }
 app.use(restify.bodyParser());
 app.use(restify.acceptParser(app.acceptable));
 app.use(restify.queryParser());
 
+
+// app asstes
+var database = require('./database')(config);
+var routes = require('./routes')(app, config);
+
+// start listening
 app.listen(config.port, function() {
   console.log('%s listening at %s', app.name, app.url);
 });
-
-var database = require('./database')(config);
-
-require('./routes/routes')(app, config);
-
-
-
-//preflightEnabler = require('se7ensky-restify-preflight');
-// Bootstrap auth middleware
-//var auth = require(config_path + '/middlewares/authorization.js');
-// allows authenticated cross domain requests
-//preflightEnabler(app);
