@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <title>NBooks</title>
     <link href="/NBooks/resource/css/bootstrap.css" rel="stylesheet">
+    <link href="/NBooks/resource/css/NBook.css" rel="stylesheet">
   </head>
 	
   <body>
@@ -18,7 +19,7 @@
            Tem por objetivo demonstrar funcionalidades do framework de desenvolvimento web VRaptor.
            Os dados aqui inseridos são persistidos, consultados e editados através de uma API REST.
         </p>
-        <p><a href="/NBooks/book/add" class="btn btn-primary btn-large">Novo Livro »</a></p>
+        <p><a href="/NBooks/book/add" class="btn btn-primary btn-lg">Novo Livro »</a></p>
       </div>
     </div>
 
@@ -29,7 +30,10 @@
             		<div class="thumbnail">
 		       			<h2>${book.title}</h2>
             			<p>${book.resume}</p>
-           				<p><a class="btn btn-primary btn-lg" href="#" role="button">View details &raquo;</a></p>
+           				<p>
+           					<a class="btn btn-primary" href="/NBooks/book/edit/${book._id}" role="button">Ver Detalhes &raquo;</a>
+           					<a href="/NBooks/book/delete/${book._id}"><span class="glyphicon glyphicon-trash right"></span></a>
+           				</p>
     	 			</div>
         	  	</div> 
 	        </c:forEach>
@@ -38,7 +42,11 @@
       <hr>
 
       <footer>
-        <p>Sistemas de Informação - Tópicos Avançados I</p>
+	      	<img style="margin-left: 40px;" src="/NBooks/resource/images/mongodb.png">
+	      	<img style="margin-left: 40px;" src="/NBooks/resource/images/nodejs.png">
+	      	<img style="margin-left: 40px;" src="/NBooks/resource/images/vraptor.jpg">
+	      	<img style="margin-left: 40px;" src="/NBooks/resource/images/github.jpg">
+	     	<p style="margin-top: 40px;"><h4>2013 - Sistemas de Informação - Tópicos Avançados I</h4></p>
       </footer>
     </div> 
 

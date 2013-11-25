@@ -20,7 +20,7 @@ public class IndexController {
 	@Inject
 	private BookService service;
 	
-	@Get("/index")
+	@Get("/")
 	public void index() {
 		result.redirectTo(this).form();
 	}

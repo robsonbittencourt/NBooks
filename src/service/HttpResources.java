@@ -87,7 +87,6 @@ public class HttpResources {
 	public String getStringFromInputStream(InputStream input) throws IOException {
 		StringWriter writer = new StringWriter();
 		IOUtils.copy(input, writer, "UTF-8");
-		System.out.println(writer.toString());
 		return writer.toString();
 	}
 

@@ -8,40 +8,93 @@
     <meta charset="utf-8">
     <title>NBooks</title>
     <link href="/NBooks/resource/css/bootstrap.css" rel="stylesheet">
+    <link href="/NBooks/resource/css/NBook.css" rel="stylesheet">
   </head>
 
 <body>
-	<div>
-        <form action="save" method="post">
-        	<fieldset>
+	<div class="book-form">
+        <form role="form-horizontal" action="save" method="post">
+        		<legend>Novo livro</legend>
 	    		<input type="hidden" name="book._id" value="${book._id}">
-	    		<label>Título</label>
-	    		<input type="text" name="book.title" value="${book.title}"><br>
-	    		<label>Autor</label>
-	    		<input type="text" name="book.author" value="${book.author}"><br>
-	    		<label>Número de Páginas</label>
-	    		<input type="text" name="book.pageNumber" value="${book.pageNumber}"><br>
-	    		<label>Editora</label>
-	    		<input type="text" name="book.publisher" value="${book.publisher}"><br>
-	    		<label>Estado</label>
-	    		<input type="text" name="book.state" value="${book.state}"><br>
-	    		<label>Ano de Publicação</label>
-	    		<input type="text" name="book.year" value="${book.year}"><br>
-	    		<label>ISBN</label>
-	    		<input type="text" name="book.isbn" value="${book.isbn}"><br>
-	    		<label>Resumo</label>
-	    		<input type="text" name="book.resume" value="${book.resume}"><br>
-	    		<label>Notas</label>
-	    		<input type="text" name="book.notes" value="${book.notes}"><br>
-	    		<label>Quantidade</label>
-	    		<input type="text" name="book.quantity" value="${book.quantity}"><br>
 	    		
-	    		<button type="submit" class="btn btn-primary">Salvar</button>
-	    		<button type="submit" class="btn" formaction="/NBooks/index/form">Cancelar</button>
-  			</fieldset>
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">Título</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.title" value="${book.title}"><br>
+				    </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">Autor</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.author" value="${book.author}"><br>
+				    </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">Páginas</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.pageNumber" value="${book.pageNumber}"><br>
+				    </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">Editora</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.publisher" value="${book.publisher}"><br>
+				    </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">Estado</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.state" value="${book.state}"><br>
+				    </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">Ano de Publicação</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.year" value="${book.year}"><br>
+				    </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">ISBN</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.isbn" value="${book.isbn}"><br>
+				    </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">Resumo</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.resume" value="${book.resume}"><br>
+				    </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">Notas</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.notes" value="${book.notes}"><br>
+				    </div>
+	    		</div>
+	    		
+	    		<div class="form-group">
+	    			<label for="title" class="col-sm-2 control-label">Quantidade</label>
+				    <div class="col-sm-10">
+				    	<input type="text" class="form-control" id="title" name="book.quantity" value="${book.quantity}"><br>
+				    </div>
+	    		</div>
+   		
+	    		<div class="form-group">
+    				<div class="col-sm-offset-2 col-sm-10">
+      					<button type="submit" class="btn btn-primary">Salvar</button>
+	    				<button type="submit" class="btn" formaction="/NBooks/index/form">Cancelar</button>
+    				</div>
+  				</div>
+  				
         	</form>
-        
-            
     </div>
 </body>
 </html>

@@ -37,7 +37,14 @@ public class BookController {
 		}else{
 			service.save(book);
 		}	
-		result.redirectTo(this).form(book);
+		result.redirectTo(IndexController.class).form();
+	}
+	
+	@Get("/book/delete/{id}")
+	public void delete(String id){
+		Book book = service.findById(id);
+		service.delete(book);
+		result.redirectTo(IndexController.class).form();
 	}
 	
 	public void form(Book book) {
