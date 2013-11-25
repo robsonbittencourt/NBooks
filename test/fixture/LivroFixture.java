@@ -1,15 +1,15 @@
 package fixture;
 
-import model.Livro;
+import model.Book;
 
 public class LivroFixture {
-	private Livro livro = new Livro();
+	private Book livro = new Book();
 	
 	public static LivroFixture get() {
 		return new LivroFixture();
 	}
 	
-	public Livro cria() {
+	public Book cria() {
 		return this.livro;
 	}
 }
